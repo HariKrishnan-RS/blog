@@ -58,12 +58,13 @@
 </head>
 
 <body>
+  
     <div class="post">
         <h1 class="post-title">{{$post->title}}</h1>
         <img src="{{ asset('images/post-img.jpg') }}" alt="Post Image" class="post-image">
         <div class="author">
-            <img src="path/to/author-image.jpg" alt="Author Image" class="author-image">
-            <span class="author-name">Author Name</span>
+            <img src="{{ asset('images/user.png') }}" alt="Author Image" class="author-image">
+            <span class="author-name">{{$user_name}}</span>
         </div>
         <p class="full-description">
         {{$post->full_description}}    
