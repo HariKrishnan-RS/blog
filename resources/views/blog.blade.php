@@ -86,7 +86,9 @@
 
 
     </div>
-
+@if(auth()->user()->role === 'user')
+<a href="{{route('add.page')}}" class="btn-success">Add Post</a>
+@endif
 <form method="POST" action="{{ route('blog.page') }}">
     @csrf
     <button class="btn-secondary" type="submit">Logout</button>

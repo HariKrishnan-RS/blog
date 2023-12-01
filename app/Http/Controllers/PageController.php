@@ -20,4 +20,9 @@ class PageController extends Controller
         $user = User::find($user_id);
         return view("read",['id'=>$id,'post' => $post,'user_name'=>$user->name]);
     }
+
+
+    public function addPost(){
+            return view("add");
+    }
 }

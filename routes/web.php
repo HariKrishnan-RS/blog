@@ -44,3 +44,5 @@ Route::post('/register', [RegisterController::class,'register'])->name('register
 Route::post('/blogPage', [LoginController::class,'logout'])->name('logout.user');
 
 // Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
+Route::get('addPost',[PageController::class,'addPost'])->name('add.page');
