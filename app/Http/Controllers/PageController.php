@@ -12,6 +12,7 @@ class PageController extends Controller
     }
 
     public function readPage($id){
-        return view("read",['id'=>$id]);
+        $post = Post::find($id);
+        return view("read",['id'=>$id,'post' => $post]);
     }
 }
