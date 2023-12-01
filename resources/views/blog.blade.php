@@ -72,7 +72,7 @@
 
 @foreach($posts as $post)
     <div class="card">
-        <img src="{{ asset('images/post-img.jpg') }}" class="card-img" alt="Placeholder Image">
+        <img src="{{ asset('images/post-img.jpg') }}" class="card-img card-img-top" alt="Placeholder Image">
         <div class="card-body">
             <h5 class="card-title">{{ $post->title }}</h5>
             <p class="card-text">{{ $post->small_description }}</p>
