@@ -33,11 +33,12 @@ public function storePost(Request $request){
         $post->draft = true;
         } else {
         $post->draft = false;
+        $userEmail = "harikrishnan.radhakrishnan@qburst.com"; 
+        Mail::to($userEmail)->send(new NewPostNotification());
         }
         $post->save();
 
-        $userEmail = "harikrishnan.radhakrishnan@qburst.com"; 
-        Mail::to($userEmail)->send(new NewPostNotification());
+
 
         $userId = Auth::id();
         $join = new Join();

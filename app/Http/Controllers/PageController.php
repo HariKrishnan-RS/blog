@@ -6,7 +6,8 @@ use App\Models\Join;
 use App\Models\User;
 use App\Models\Draft;
 use Illuminate\Http\Request;
-
+use App\Mail\conformNotification;
+use Illuminate\Support\Facades\Mail;
 class PageController extends Controller
 {
     public function MainPage(){
@@ -16,7 +17,7 @@ class PageController extends Controller
 
     public function readPage($id){
         $post = Post::find($id);
-        $join = Join::find($id);
+        $join = Join::where('post_id', $id)->first();
         $user_id = $join->user_id;
         $user = User::find($user_id);
         return view("read",['id'=>$id,'post' => $post,'user_name'=>$user->name]);
@@ -25,6 +26,10 @@ class PageController extends Controller
         $post = Post::find($id);
         $post->approved = true;
         $post->save();
+        
+        $userEmail = "harikrishnan.radhakrishnan@qburst.com"; 
+        Mail::to($userEmail)->send(new conformNotification());
+
         return redirect()->route('pending.page')->with('approve','success fully approved');
     }
 
