@@ -6,7 +6,7 @@ use App\Http\Controllers\PageController;
 use \App\Http\Middleware\RedirectIfNotAuthenticated;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-
+use App\Http\Controllers\postController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,6 +34,10 @@ Route::get('blogPage/read/{id}', [PageController::class, 'readPage'])
 ->name('read.page')
 ->middleware(RedirectIfNotAuthenticated::class);
 
+Route::post('blogPage/read/{id}', [PageController::class, 'approve'])
+->name('read.page');
+
+
 
 Route::get('/login', [LoginController::class,'showLoginForm'])->name('login.page');
 Route::post('/login', [LoginController::class,'login']);
@@ -46,3 +50,9 @@ Route::post('/blogPage', [LoginController::class,'logout'])->name('logout.user')
 // Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 Route::get('addPost',[PageController::class,'addPost'])->name('add.page');
+
+Route::post('/storePost',[postController::class,'storePost'])->name('store.post');
+
+Route::get('draftPage/{id}',[PageController::class,'draftPage'])->name('draft.page');
+
+Route::get('pending}',[PageController::class,'pendingPage'])->name('pending.page');

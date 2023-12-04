@@ -70,6 +70,14 @@
         {{$post->full_description}}    
         
         </p>
+
+    <div>
+        <form method="POST" action="{{ route('read.page',['id'=>$post->id]) }}">
+        @csrf
+        <button class="btn-primary" type="submit">Approve</button>
+        </form>
+
+    </div>
     </div>
 </body>
 

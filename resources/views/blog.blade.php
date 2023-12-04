@@ -71,6 +71,7 @@
     
 
 @foreach($posts as $post)
+@if($post->approved && !$post->draft)
     <div class="card">
         <img src="{{ asset('images/post-img.jpg') }}" class="card-img card-img-top" alt="Placeholder Image">
         <div class="card-body">
@@ -81,14 +82,26 @@
             <a href="{{ route('read.page', ['id' => $post->id]) }}" class="btn btn-primary">Read</a>
         </div>
     </div>
+@endif
 @endforeach
 
 
 
     </div>
+    
+@auth
 @if(auth()->user()->role === 'user')
 <a href="{{route('add.page')}}" class="btn-success">Add Post</a>
+<a href="{{route('draft.page',['id'=> auth()->user()->id ])}}" class="btn-alert">Draft</a>
 @endif
+@endauth
+
+@auth
+    @if(auth()->user()->role === 'admin')
+   <a href="{{route('pending.page')}}">Pending</a>
+    @endif
+@endauth
+
 <form method="POST" action="{{ route('blog.page') }}">
     @csrf
     <button class="btn-secondary" type="submit">Logout</button>

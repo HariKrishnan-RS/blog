@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('heading');
             $table->string('small_description');
             $table->string('full_description');
             $table->integer('rating')->default(0);
+            $table->boolean('approved')->default(false);
+            $table->boolean('draft')->default(false);
             $table->timestamps();
          
         });
