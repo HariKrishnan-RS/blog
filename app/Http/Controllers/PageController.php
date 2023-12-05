@@ -30,15 +30,20 @@ class PageController extends Controller
  
     }
 
-    public function approve($id){
+    public function approve(request $request, $id){
+    if($request->has('delete')){
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->route('blog.page')->with('delete','successfully deleted');
+    }
+    else{
         $post = Post::find($id);
         $post->approved = true;
         $post->save();
-        
         $userEmail = "harikrishnan.radhakrishnan@qburst.com"; 
         Mail::to($userEmail)->send(new conformNotification());
-
         return redirect()->route('pending.page')->with('approve','success fully approved');
+       }
     }
 
 
@@ -51,8 +56,9 @@ public function draftPage($id){
     $post->delete();
      return view('draft',['post'=>$post]);
     }
-    $posts = Post::all();
-    return view("blog",['posts' => $posts]);
+    // $posts = Post::all();
+    // return view("blog",['posts' => $posts]);
+    return redirect()->back()->with('draftMsg','No draft available');
 }  
 
     public function addPost(){

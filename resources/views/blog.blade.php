@@ -10,29 +10,6 @@
 
 </head>
 <body>
-@auth
-    @if(auth()->user()->role === 'admin')
-        <p>Welcome Admin!</p>
-    @elseif(auth()->user()->role === 'editor')
-        <p>Welcome editor!</p>
-    @else
-        <p>Welcome User!</p>
-    @endif
-@endauth
-
-
-@if(session('login_message'))
-    <div class="alert">
-        {{ session('login_message') }}
-    </div>
-@endif
-
-@if(session('logout_message'))
-    <div class="alert">
-        {{ session('logout_message') }}
-    </div>
-@endif
-
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light top-nav">
   <a class="navbar-brand" href="#">BlogPage</a>
@@ -64,13 +41,42 @@
 <img class="blog-img" src="{{ asset('images/blog-img.jpg') }}" alt="blog">
 <p class="my-blog-title">My Blog</p>
 </div>
-   
+@auth
+<div class="alert alert-primary mt-1" role="alert">
+    @if(auth()->user()->role === 'admin')
+        Welcome Admin!
+    @elseif(auth()->user()->role === 'editor')
+        Welcome editor!
+    @else
+        Welcome User: {{auth()->user()->name}}
+    @endif
+  </div>
+@endauth   
 
+@if(session('draftMsg'))
+    <div class="alert alert-danger mt-1" role="alert">
+        {{ session('draftMsg') }}
+    </div>
+@endif
+@if(session('login_message'))
+    <div class="alert alert-success mt-1" role="alert">
+        {{ session('login_message') }}
+    </div>
+@endif
+@if(session('logout_message'))
+    <div class="alert alert-success mt-1" role="alert">
+        {{ session('logout_message') }}
+    </div>
+@endif
+@if(session('posted'))
+    <div class="alert alert-success mt-1" role="alert">
+        {{ session('posted') }}
+    </div>
+@endif
 
-  <div class = "m-4 gap-4 card-pack">
+<div class = "m-4 gap-4 card-pack" id="card-pack">
     
-
-@foreach($posts as $post)
+{{-- @foreach($posts as $post)
 @if($post->approved && !$post->draft)
     <div class="card">
         <img src="{{ asset('images/post-img.jpg') }}" class="card-img card-img-top" alt="Placeholder Image">
@@ -83,32 +89,44 @@
         </div>
     </div>
 @endif
-@endforeach
+@endforeach --}}
 
 
 
     </div>
     
 @auth
+<div class="d-flex align-items-center justify-content-center flex-column">
 @if(auth()->user()->role === 'user')
-<a href="{{route('add.page')}}" class="btn-success">Add Post</a>
+<a  href="{{route('add.page')}}" class="btn btn-success text-decoration-none">Add Post</a>
 <a href="{{route('draft.page',['id'=> auth()->user()->id ])}}" class="btn-alert">Draft</a>
 @endif
+</div>
+
 @endauth
 
 @auth
+<div class="d-flex align-items-center justify-content-center flex-column">
     @if(auth()->user()->role === 'admin')
-   <a href="{{route('pending.page')}}">Pending</a>
+   <a href="{{route('pending.page')}}" class="btn btn-warning text-decoration-none" >Pending posts</a>
     @endif
+</div>
 @endauth
 
+@auth
+@if(auth())
 <form method="POST" action="{{ route('blog.page') }}">
     @csrf
     <button class="btn-secondary" type="submit">Logout</button>
 </form>
+@endif
+@endauth
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="{{ asset('script.js') }}"></script>
+
 </body>
 </html>

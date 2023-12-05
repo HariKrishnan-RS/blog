@@ -12,6 +12,15 @@ use App\Mail\NewPostNotification;
 use Illuminate\Support\Facades\Mail;
 class PostController extends Controller
 {
+
+    public function index()
+    {
+        $posts = Post::all(); // Retrieve all posts 
+        return response()->json($posts);
+    }
+
+
+
 public function storePost(Request $request){
     
       $request->validate([
@@ -53,13 +62,14 @@ public function storePost(Request $request){
         $draft->save();
       // dd('sss');
       }
-        return redirect()->route('blog.page')->with('success', 'Post created successfully');
+        return redirect()->route('blog.page')->with('posted', 'Post created successfully');
     
     
       }
 }
 public function editPost(Request $request,$id){
-    
+  
+
       $request->validate([
         'title' => 'required',
         'small_description' => 'required',

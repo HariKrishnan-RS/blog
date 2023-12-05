@@ -1,9 +1,20 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+</head>
+<body>
  <div class="container">
         <h1>Add Post</h1>
         <form method="POST" action="{{ route('store.post') }}"  enctype="multipart/form-data">
           {{--  --}}
             @csrf
-
             <!-- Title -->
             <div class="form-group">
                 <label for="title">Title:</label>
@@ -23,7 +34,7 @@
             </div>
 
             <!-- Image Upload -->
-            <div class="form-group">
+            <div class="form-group mt-3 mb-3">
                 <label for="image">Upload Image:</label>
                 <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
             </div>
@@ -35,3 +46,12 @@
             </div>
         </form>
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="{{ asset('script.js') }}"></script>
+
+</body>
+</html>

@@ -60,3 +60,5 @@ Route::get('draftPage/{id}',[PageController::class,'draftPage'])->name('draft.pa
 Route::get('pending}',[PageController::class,'pendingPage'])->name('pending.page');
 
 Route::get('editPage/{id}',[PageController::class,'editPage'])->name('edit.page');
+
+Route::get('/api/posts', [PostController::class,'index']);

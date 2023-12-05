@@ -7,7 +7,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Post Detail</title>
-    <style>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<style>
         /* Basic styles for layout */
         body {
             font-family: Arial, sans-serif;
@@ -74,22 +77,35 @@
     <div>
 
     @auth
-        @if(auth()->user()->role === 'admin')
+        @if(auth()->user()->role === 'admin' && !$post->approved)
         <form method="POST" action="{{ route('read.page',['id'=>$post->id]) }}">
             @csrf
-            <button class="btn-primary" type="submit">Approve</button>
+            <button class="btn btn-success mt-1"  type="submit">Approve</button>
             </form>
         @endif
+        @if(auth()->user()->role === 'admin' && $post->approved)
+        <form method="POST" action="{{ route('read.page',['id'=>$post->id]) }}">
+            @csrf
+            <button class="btn btn-danger mt-1"  type="submit" name="delete">Delete</button>
+            </form>
+        @endif
+
         @if(auth()->user()->role === 'editor')
             <form method="GET" action="{{ route('edit.page',['id'=>$post->id]) }}">
             @csrf
-            <button class="btn-primary" type="submit">Edit</button>
+            <button class="btn btn-warning mt-1"  type="submit">Edit</button>
             </form>
         @endif
     @endauth
         
     </div>
     </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
