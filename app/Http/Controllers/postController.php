@@ -58,4 +58,29 @@ public function storePost(Request $request){
     
       }
 }
+public function editPost(Request $request,$id){
+    
+      $request->validate([
+        'title' => 'required',
+        'small_description' => 'required',
+        'full_description' => 'required',
+    ]);
+
+    if ($request->has('edit')) {
+      $post = Post::find($id);
+      $post->title = $request->title;
+      $post->small_description = $request->small_description;
+      $post->full_description = $request->full_description;
+      $post->save();
+      return redirect()->route('blog.page')->with('edited', 'Post Edited successfully');
+    }
+    else{
+      return redirect()->route('blog.page')->with('edited', 'Editing Cancled');
+    }
+  
+  }
+
+
+
+
 }

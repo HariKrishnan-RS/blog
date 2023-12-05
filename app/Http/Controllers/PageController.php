@@ -22,6 +22,14 @@ class PageController extends Controller
         $user = User::find($user_id);
         return view("read",['id'=>$id,'post' => $post,'user_name'=>$user->name]);
     }
+
+   public function editPage($id){
+       $post = Post::find($id);
+ 
+        return view("edit",['post'=>$post]);
+ 
+    }
+
     public function approve($id){
         $post = Post::find($id);
         $post->approved = true;

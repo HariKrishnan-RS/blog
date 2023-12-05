@@ -72,11 +72,22 @@
         </p>
 
     <div>
-        <form method="POST" action="{{ route('read.page',['id'=>$post->id]) }}">
-        @csrf
-        <button class="btn-primary" type="submit">Approve</button>
-        </form>
 
+    @auth
+        @if(auth()->user()->role === 'admin')
+        <form method="POST" action="{{ route('read.page',['id'=>$post->id]) }}">
+            @csrf
+            <button class="btn-primary" type="submit">Approve</button>
+            </form>
+        @endif
+        @if(auth()->user()->role === 'editor')
+            <form method="GET" action="{{ route('edit.page',['id'=>$post->id]) }}">
+            @csrf
+            <button class="btn-primary" type="submit">Edit</button>
+            </form>
+        @endif
+    @endauth
+        
     </div>
     </div>
 </body>

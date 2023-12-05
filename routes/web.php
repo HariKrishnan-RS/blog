@@ -53,6 +53,10 @@ Route::get('addPost',[PageController::class,'addPost'])->name('add.page');
 
 Route::post('/storePost',[postController::class,'storePost'])->name('store.post');
 
+Route::post('/editPost/{id}',[postController::class,'editPost'])->name('edit.post');
+
 Route::get('draftPage/{id}',[PageController::class,'draftPage'])->name('draft.page');
 
 Route::get('pending}',[PageController::class,'pendingPage'])->name('pending.page');
+
+Route::get('editPage/{id}',[PageController::class,'editPage'])->name('edit.page');
