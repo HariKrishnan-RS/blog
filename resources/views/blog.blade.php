@@ -36,7 +36,6 @@
 
 
 
-
 <div class="blog-img-div">
 <img class="blog-img" src="{{ asset('images/blog-img.jpg') }}" alt="blog">
 <p class="my-blog-title">My Blog</p>
@@ -51,7 +50,7 @@
         Welcome User: {{auth()->user()->name}}
     @endif
   </div>
-@endauth   
+@endauth
 
 @if(session('draftMsg'))
     <div class="alert alert-danger mt-1" role="alert">
@@ -79,9 +78,9 @@
           @foreach($tags as $tag)
           <div class="d-flex align-items-center justify-content-center flex-column p-1">
             {{-- <input type="checkbox" class="btn-check" id="tag_{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}"> --}}
-          
+
             <input type="checkbox" class="btn-check" id="tag_{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}" autocomplete="off">
-            
+
             <label  style="font-size:15px"  class="btn btn-outline-primary" for="tag_{{ $tag->id }}">{{ $tag->tagName }}</label>
           </div>
           @endforeach
@@ -94,26 +93,26 @@
 
 
 <div class = "m-4 gap-4 card-pack" id="card-pack">
-    
-{{-- @foreach($posts as $post)
-@if($post->approved && !$post->draft)
-    <div class="card">
-        <img src="{{ asset('images/post-img.jpg') }}" class="card-img card-img-top" alt="Placeholder Image">
-        <div class="card-body">
-            <h5 class="card-title">{{ $post->title }}</h5>
-            <p class="card-text">{{ $post->small_description }}</p>
-            <!-- If you want to display the full description in the card: -->
-            <!-- <p class="card-text">{{ $post->full_description }}</p> -->
-            <a href="{{ route('read.page', ['id' => $post->id]) }}" class="btn btn-primary">Read</a>
-        </div>
-    </div>
-@endif
-@endforeach --}}
+
+{{-- @foreach($posts as $post)--}}
+{{--@if($post->approved && !$post->draft)--}}
+{{--    <div class="card">--}}
+{{--        <img src="{{ asset('images/post-img.jpg') }}" class="card-img card-img-top" alt="Placeholder Image">--}}
+{{--        <div class="card-body">--}}
+{{--            <h5 class="card-title">{{ $post->title }}</h5>--}}
+{{--            <p class="card-text">{{ $post->small_description }}</p>--}}
+{{--            <!-- If you want to display the full description in the card: -->--}}
+{{--            <!-- <p class="card-text">{{ $post->full_description }}</p> -->--}}
+{{--            <a href="{{ route('read.page', ['id' => $post->id]) }}" class="btn btn-primary">Read</a>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--@endif--}}
+{{--@endforeach--}}
 
 
 
-    </div>
-    
+</div>
+
 @auth
 <div class="d-flex align-items-center justify-content-center flex-column">
 @if(auth()->user()->role === 'user')

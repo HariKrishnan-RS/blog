@@ -26,10 +26,10 @@ RUN echo '<VirtualHost *:80>' > /tmp/new_conf.txt \
     && echo '</VirtualHost>' >> /tmp/new_conf.txt
 # Replace the content of 000-default.conf with the content from the temporary file
 RUN cat /tmp/new_conf.txt > /etc/apache2/sites-available/000-default.conf
-RUN a2enmod rewrite
-#RUN php artisan migrate
+#RUN a2enmod rewrite
+#RUN php artisan migrate:fresh --seed
 # Expose port 80
 EXPOSE 80
-
+ENTRYPOINT ["/var/www/html/shell.sh"]
 # Start Apache
-CMD ["apache2-foreground"]
+#CMD ["apache2-foreground"]

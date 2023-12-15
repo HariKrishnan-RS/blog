@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Join;
+use App\Models\Tagjoin;
 use App\Models\User;
 use App\Models\Tag;
 use App\Models\Comment;
@@ -14,13 +15,12 @@ class PageController extends Controller
 {
 
     public function MainPage(request $request){
-
         if($request->has("tagsearch")){
-
                $posts = Post::all();
                $tags = Tag::all();
-               return view("blog",['posts' => $posts,'tags'=>$tags]);
+            return view("blog",['posts' => $posts,'tags'=>$tags]);
         }
+
         else{
                $posts = Post::all();
                $tags = Tag::all();

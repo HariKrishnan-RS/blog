@@ -1,4 +1,4 @@
-fetch("http://localhost:8000/api/posts")
+fetch("http://localhost:8080/api/posts")
     .then((response) => response.json())
     .then((posts) => {
         const postsContainer = document.getElementById("card-pack");

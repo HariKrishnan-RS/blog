@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('small_description');
             $table->text('full_description');
             $table->integer('rating')->default(0);
-            $table->boolean('approved')->default(true);
+            $table->boolean('approved')->default(false);
             $table->boolean('draft')->default(false);
             $table->timestamps();
 
