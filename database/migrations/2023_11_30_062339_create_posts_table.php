@@ -15,16 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('small_description');
-            $table->string('full_description');
+            $table->text('full_description');
             $table->integer('rating')->default(0);
-            $table->boolean('approved')->default(false);
+            $table->boolean('approved')->default(true);
             $table->boolean('draft')->default(false);
             $table->timestamps();
-         
+
         });
     }
 
-    /**  
+    /**
      * Reverse the migrations.
      */
     public function down(): void

@@ -73,6 +73,25 @@
         {{ session('posted') }}
     </div>
 @endif
+{{-- tag search --}}
+<form method="get" action="{{route('blog.page')}}"  enctype="multipart/form-data">
+  <div class="d-flex justify-content-between p-3 flex-wrap " >
+          @foreach($tags as $tag)
+          <div class="d-flex align-items-center justify-content-center flex-column p-1">
+            {{-- <input type="checkbox" class="btn-check" id="tag_{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}"> --}}
+          
+            <input type="checkbox" class="btn-check" id="tag_{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}" autocomplete="off">
+            
+            <label  style="font-size:15px"  class="btn btn-outline-primary" for="tag_{{ $tag->id }}">{{ $tag->tagName }}</label>
+          </div>
+          @endforeach
+</div>
+<div class="d-flex align-items-center justify-content-center flex-column">
+<button class="btn btn-danger" type="submit" name="tagsearch">Search</button>
+</div>
+</form>
+
+
 
 <div class = "m-4 gap-4 card-pack" id="card-pack">
     

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Join;
+use App\Models\Tagjoin;
 use App\Models\Draft;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,7 +20,25 @@ class PostController extends Controller
         return response()->json($posts);
     }
 
-
+public function draftPost(Request $request,$id) {
+  if(!$request->has("asDraft")) {
+  $post = Post::find($id);
+  $post->draft = false;
+  $post->save();
+  foreach($request->tags as $idd){
+          $tagjoin = new Tagjoin;
+          $tagjoin->post_id = $post->id;
+          $tagjoin->tag_id = $idd;
+          $tagjoin->save();
+  }
+  $draft = Draft::where('post_id',$id);
+  $draft->delete();  
+  return redirect()->route('blog.page');
+  }
+  else{
+  return redirect()->route('blog.page');
+  }
+}
 
 public function storePost(Request $request){
     
@@ -41,14 +60,22 @@ public function storePost(Request $request){
         if ($request->has('asDraft')) {
         $post->draft = true;
         } else {
+
+
         $post->draft = false;
         $userEmail = "harikrishnan.radhakrishnan@qburst.com"; 
         Mail::to($userEmail)->send(new NewPostNotification());
         }
+        
         $post->save();
-
-
-
+        if (!$request->has('asDraft')) {
+        foreach($request->tags as $id){
+          $tagjoin = new Tagjoin;
+          $tagjoin->post_id = $post->id;
+          $tagjoin->tag_id = $id;
+          $tagjoin->save();
+        }
+      }
         $userId = Auth::id();
         $join = new Join();
         $join->user_id = $userId;

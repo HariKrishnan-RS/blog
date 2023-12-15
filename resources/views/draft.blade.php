@@ -1,6 +1,6 @@
  <div class="container">
         <h1>Add Post</h1>
-        <form method="POST" action="{{ route('store.post') }}"  enctype="multipart/form-data">
+        <form method="POST" action="{{ route('draft.post',['id'=>$post->id]) }}"  enctype="multipart/form-data">
           {{--  --}}
             @csrf
 
@@ -28,13 +28,17 @@
             <!-- Image Upload -->
             <div class="form-group">
                 <label for="image">Upload Image:</label>
-                <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
+                <input type="file" class="form-control-file" id="image" name="image" accept="image/*" >
             </div>
-
+            <label>Select Tags:</label><br>
+             @foreach($tags as $tag)
+               <input type="checkbox" id="tag_{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}">
+               <label for="tag_{{ $tag->id }}">{{ $tag->tagName }}</label><br>
+             @endforeach
             <!-- Submit and Save as Draft Buttons -->
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="submit" class="btn btn-secondary" name="asDraft">Save as Draft</button>
+                <button type="submit" class="btn btn-secondary" name="asDraft">back</button>
             </div>
         </form>
     </div>

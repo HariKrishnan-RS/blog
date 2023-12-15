@@ -38,6 +38,12 @@
                 <label for="image">Upload Image:</label>
                 <input type="file" class="form-control-file" id="image" name="image" accept="image/*" required>
             </div>
+            {{-- select tags --}}
+            <label>Select Tags:</label><br>
+             @foreach($tags as $tag)
+               <input type="checkbox" id="tag_{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}">
+               <label for="tag_{{ $tag->id }}">{{ $tag->tagName }}</label><br>
+             @endforeach
 
             <!-- Submit and Save as Draft Buttons -->
             <div class="form-group">
